@@ -30,9 +30,17 @@ class AppTheme {
           textStyle: TextStyle(fontWeight: FontWeight.w600),
         ),
       ),
+      buttonTheme: ButtonThemeData(
+        textTheme: ButtonTextTheme.primary,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+      ),
       textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(
-          foregroundColor: colorScheme.primary,
+          backgroundColor: colorScheme.primary,
+          foregroundColor: colorScheme.onPrimary,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadiusGeometry.circular(4),
+          ),
           textStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 18.0),
         ),
       ),
@@ -47,6 +55,7 @@ class AppTheme {
       floatingActionButtonTheme: FloatingActionButtonThemeData(
         shape: CircleBorder(),
       ),
+
       textTheme: ThemeData(colorScheme: colorScheme, useMaterial3: true)
           .textTheme
           .copyWith(

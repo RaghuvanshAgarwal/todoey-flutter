@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todoey/app_theme.dart';
-import 'package:todoey/components/tasks_list.dart';
+import 'package:todoey/screens/task_screen/components/tasks_list.dart';
 
 class TaskListContainer extends StatelessWidget {
   const TaskListContainer({super.key, required this.mockTasks});
