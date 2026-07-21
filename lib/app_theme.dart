@@ -90,6 +90,7 @@ class AppTheme {
         ),
         AppSpacing(s1: 4, s2: 8, s3: 12, s4: 16, s5: 24),
         const AppRadius(xs: 4, sm: 8, md: 12, lg: 16, xl: 24, full: 999),
+        const AppPadding(xs: 4, sm: 8, md: 12, lg: 16, xl: 24, full: 999),
       ],
     );
   }
@@ -203,6 +204,50 @@ class AppRadius extends ThemeExtension<AppRadius> {
     if (other is! AppRadius) return this;
 
     return AppRadius(
+      xs: lerpDouble(xs, other.xs, t),
+      sm: lerpDouble(sm, other.sm, t),
+      md: lerpDouble(md, other.md, t),
+      lg: lerpDouble(lg, other.lg, t),
+      xl: lerpDouble(xl, other.xl, t),
+      full: lerpDouble(full, other.full, t),
+    );
+  }
+}
+
+class AppPadding extends ThemeExtension<AppPadding> {
+  final double? xs;
+  final double? sm;
+  final double? md;
+  final double? lg;
+  final double? xl;
+  final double? full;
+
+  const AppPadding({this.xs, this.sm, this.md, this.lg, this.xl, this.full});
+
+  @override
+  AppPadding copyWith({
+    double? xs,
+    double? sm,
+    double? md,
+    double? lg,
+    double? xl,
+    double? full,
+  }) {
+    return AppPadding(
+      xs: xs ?? this.xs,
+      sm: sm ?? this.sm,
+      md: md ?? this.md,
+      lg: lg ?? this.lg,
+      xl: xl ?? this.xl,
+      full: full ?? this.full,
+    );
+  }
+
+  @override
+  AppPadding lerp(ThemeExtension<AppPadding>? other, double t) {
+    if (other is! AppPadding) return this;
+
+    return AppPadding(
       xs: lerpDouble(xs, other.xs, t),
       sm: lerpDouble(sm, other.sm, t),
       md: lerpDouble(md, other.md, t),
