@@ -44,6 +44,9 @@ class AppTheme {
         prefixIconColor: colorScheme.onSurfaceVariant,
         suffixIconColor: colorScheme.onSurfaceVariant,
       ),
+      floatingActionButtonTheme: FloatingActionButtonThemeData(
+        shape: CircleBorder(),
+      ),
       textTheme: ThemeData(colorScheme: colorScheme, useMaterial3: true)
           .textTheme
           .copyWith(

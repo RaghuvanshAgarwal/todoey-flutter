@@ -13,9 +13,9 @@ class TasksScreen extends StatelessWidget {
     final AppRadius radius = themeData.extension<AppRadius>()!;
     return Scaffold(
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            width: double.infinity,
             padding: EdgeInsets.fromLTRB(30, 60, 30, 30),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -47,6 +47,10 @@ class TasksScreen extends StatelessWidget {
             ),
           ),
         ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        child: FaIcon(FontAwesomeIcons.plus),
       ),
     );
   }
