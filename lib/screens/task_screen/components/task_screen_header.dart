@@ -3,7 +3,9 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:todoey/app_theme.dart';
 
 class TaskScreenHeader extends StatelessWidget {
-  const TaskScreenHeader({super.key});
+  final int taskCount;
+
+  const TaskScreenHeader({super.key, required this.taskCount});
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +28,16 @@ class TaskScreenHeader extends StatelessWidget {
           ),
           SizedBox(height: spacing.s5!),
           Text('Todoey', style: themeData.textTheme.displayLarge),
-          Text('12 Tasks', style: themeData.textTheme.headlineMedium),
+          Visibility(
+            visible: taskCount != 0,
+            maintainSize: true,
+            maintainAnimation: true,
+            maintainState: true,
+            child: Text(
+              '$taskCount ${taskCount == 1 ? 'Task' : 'Tasks'}',
+              style: themeData.textTheme.headlineMedium,
+            ),
+          ),
         ],
       ),
     );

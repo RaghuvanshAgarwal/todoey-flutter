@@ -1,27 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:todoey/app_theme.dart';
+import 'package:todoey/models/task.dart';
 import 'package:todoey/screens/add_task_screen/add_task_screen.dart';
 import 'package:todoey/screens/task_screen/components/task_list_container.dart';
 import 'package:todoey/screens/task_screen/components/task_screen_header.dart';
 
-class TasksScreen extends StatelessWidget {
-  final List<String> mockTasks = [
-    'Buy Milk',
-    'Go to office',
-    'Get Ready',
-    'Study Flutter',
-  ];
+class TasksScreen extends StatefulWidget {
+  const TasksScreen({super.key});
 
-  TasksScreen({super.key});
+  @override
+  State<TasksScreen> createState() => _TasksScreenState();
+}
+
+class _TasksScreenState extends State<TasksScreen> {
+  List<Task> tasks = [];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          TaskScreenHeader(),
-          TaskListContainer(mockTasks: mockTasks),
+          TaskScreenHeader(taskCount: tasks.length),
+          TaskListContainer(tasks: tasks),
         ],
       ),
       floatingActionButton: FloatingActionButton(
@@ -38,7 +39,7 @@ class TasksScreen extends StatelessWidget {
     final AppRadius radius = themeData.extension<AppRadius>()!;
     final ColorScheme colorScheme = themeData.colorScheme;
     showModalBottomSheet(
-      barrierColor: colorScheme.tertiary!.withAlpha(150),
+      barrierColor: colorScheme.tertiary.withAlpha(150),
       isScrollControlled: true,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadiusGeometry.only(
@@ -47,8 +48,15 @@ class TasksScreen extends StatelessWidget {
         ),
       ),
       context: context,
-      builder: (context) {
-        return AddTaskScreen();
+      builder: (sheetContext) {
+        return AddTaskScreen(
+          onNewTaskAdded: (Task task) {
+            setState(() {
+              tasks.add(task);
+            });
+            Navigator.of(sheetContext).pop();
+          },
+        );
       },
     );
   }
