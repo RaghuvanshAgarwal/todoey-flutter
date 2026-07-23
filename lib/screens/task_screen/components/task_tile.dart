@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class TaskTile extends StatelessWidget {
   const TaskTile({
@@ -6,10 +7,12 @@ class TaskTile extends StatelessWidget {
     required this.task,
     required this.isDone,
     required this.checkboxCallback,
+    required this.onDelete,
   });
   final String task;
   final bool isDone;
   final Function(bool?)? checkboxCallback;
+  final VoidCallback? onDelete;
   @override
   Widget build(BuildContext context) {
     return ListTile(
@@ -23,7 +26,14 @@ class TaskTile extends StatelessWidget {
           ).colorScheme.onPrimaryContainer.withAlpha(isDone ? 150 : 255),
         ),
       ),
-      trailing: Checkbox(value: isDone, onChanged: checkboxCallback),
+      leading: Checkbox(value: isDone, onChanged: checkboxCallback),
+      trailing: IconButton(
+        onPressed: onDelete,
+        icon: FaIcon(
+          FontAwesomeIcons.trash,
+          color: Theme.of(context).colorScheme.onPrimaryContainer,
+        ),
+      ),
     );
   }
 }

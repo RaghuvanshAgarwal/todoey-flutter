@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 import 'package:todoey/app_theme.dart';
-import 'package:todoey/models/task.dart';
+import 'package:todoey/controllers/task_controller.dart';
 import 'package:todoey/screens/add_task_screen/add_task_screen.dart';
 import 'package:todoey/screens/task_screen/components/task_list_container.dart';
 import 'package:todoey/screens/task_screen/components/task_screen_header.dart';
@@ -14,16 +15,12 @@ class TasksScreen extends StatefulWidget {
 }
 
 class _TasksScreenState extends State<TasksScreen> {
-  List<Task> tasks = [];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          TaskScreenHeader(taskCount: tasks.length),
-          TaskListContainer(tasks: tasks),
-        ],
+        children: [TaskScreenHeader(), TaskListContainer()],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
@@ -50,11 +47,12 @@ class _TasksScreenState extends State<TasksScreen> {
       context: context,
       builder: (sheetContext) {
         return AddTaskScreen(
-          onNewTaskAdded: (Task task) {
-            setState(() {
-              tasks.add(task);
-            });
+          onNewTaskAdded: (String task) {
             Navigator.of(sheetContext).pop();
+            task = task.trim();
+            if (task.isNotEmpty) {
+              context.read<TaskController>().addTask(taskName: task);
+            }
           },
         );
       },
